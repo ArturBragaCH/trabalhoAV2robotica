@@ -53,18 +53,61 @@
           </div>
 
           <pre id="codeBlock">
-// Exemplo: piscar LED no pino 13
-const int ledPin = 13;
+#include <LiquidCrystal.h>
 
-void setup() {
-  pinMode(ledPin, OUTPUT);
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+String estadoPilar1, estadoPilar2;;
+int ledVermelho = 9, ledVerde = 8;
+int pilar1, pilar2;
+
+void setup(){
+  lcd.begin(16,2);
+  pinMode(A5, INPUT);
+  pinMode(A4, INPUT);
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledVermelho, OUTPUT);
+  pinMode(10, OUTPUT);
 }
 
-void loop() {
-  digitalWrite(ledPin, HIGH);
-  delay(500);
-  digitalWrite(ledPin, LOW);
-  delay(500);
+void mostrarEstado(){
+	lcd.clear();
+    lcd.setCursor(0, 0);
+  	lcd.print("Pilar 1: "+ estadoPilar1);
+    lcd.setCursor(0, 1);
+  	lcd.print("Pilar 2: "+ estadoPilar2);
+}
+
+String verificarEstado(int pilar){
+  if (pilar < 5){
+	return "Ok"; 
+  } else if (pilar <= 10){
+ 	return "Irregular"; 
+  } else {
+    return "Comprometido";
+  }
+}
+
+void loop(){
+  pilar1 = map(analogRead(A5), 585, 372, 0, 90);
+  pilar2 = map(analogRead(A4), 585, 372, 0, 90);
+  
+  estadoPilar1 = verificarEstado(pilar1);
+  estadoPilar2 = verificarEstado(pilar2);
+  
+  
+  if (estadoPilar1 == "Ok" & estadoPilar2 == "Ok"){
+    digitalWrite(ledVermelho, LOW);
+    digitalWrite(ledVerde, HIGH);
+    noTone(10);
+	mostrarEstado();
+  } else {
+    digitalWrite(ledVermelho, HIGH);
+    digitalWrite(ledVerde, LOW);
+    tone(10, 4450, 1000);
+	mostrarEstado();
+  }
+  
+  delay(100);
 }
           </pre>
         </section>
@@ -81,11 +124,14 @@ void loop() {
           <h2>Componentes</h2>
           <div class="parts" style="margin-top:10px">
             <div class="part">Arduino Uno</div>
-            <div class="part">LED</div>
-            <div class="part">Resistor 220Ω</div>
-            <div class="part">Breadboard</div>
-            <div class="part">Jumpers</div>
-            <div class="part">Fonte USB</div>
+            <div class="part">Resistor 1kΩ</div>
+            <div class="part">2 Resistor 40kΩ</div>
+            <div class="part">2 Resistor 150Ω</div>
+            <div class="part">2 Sensor flexível</div>
+            <div class="part">Piezo</div>
+            <div class="part">Potenciômetro</div>
+            <div class="part">LCD 16 x 2</div>
+            <div class="part">LED RGB</div>
           </div>
           <p class="meta" style="margin-top:12px">Quantidade e notas: ajuste conforme seu circuito.</p>
         </div>
