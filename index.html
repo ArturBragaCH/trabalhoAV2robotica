@@ -8,30 +8,26 @@
 </head>
 <body>
   <header>
-    <h1>Projeto Tinkercad — Circuito com Arduino</h1>
+    <h1>Sistema de Monitoramento Estrutural 
+Inteligente </h1>
     <nav>
-      <a href="#sobre">Sobre</a>
-      <a href="#componentes">Componentes</a>
-      <a href="#montagem">Montagem</a>
-      <a href="#codigo">Código</a>
-      <a href="#galeria">Galeria</a>
+      <p>Alunos: Artur Braga Chaffin Marques /  João Marcelo Corrêa Ramos / Magno Maia da Silva de França / Arthur Rapozo de Souza Pereira</p>
     </nav>
   </header>
 
   <main class="wrap">
     <div class="grid">
-      <!-- coluna principal -->
+
       <div>
         <section class="card" id="sobre">
           <h2>Sobre o Projeto</h2>
-          <p class="lead">Apresente aqui o objetivo do circuito: por exemplo, "piscar LEDs em sequência para demonstrar controle digital com Arduino". Explique em 2–3 linhas o que o visitante verá.</p>
-          <div class="meta">Autor: <strong>Artur</strong> • Ferramenta: <strong>Tinkercad Circuits</strong></div>
+          <p class="lead">As estruturas com maior possibilidade de apresentar risco de queda incluem marquises, lajes, estruturas em balanço, pontes, telhados, coberturas e outras construções que estão constantemente sujeitas a esforços e à ação do tempo. O risco de colapso dessas estruturas pode ser causado por diversos fatores, como falhas no planejamento e dimensionamento estrutural, utilização de materiais inadequados ou de baixa qualidade, desgaste natural dos componentes ao longo dos anos, infiltrações, corrosão das armaduras, fissuras, trincas e excesso de carga aplicada sobre a estrutura. Além disso, a falta de inspeções periódicas e de manutenção preventiva contribui significativamente para o surgimento de problemas que podem comprometer a estabilidade da construção. Em muitos casos, os acidentes envolvendo quedas de estruturas estão relacionados à negligência humana, seja na fase de projeto, execução, utilização ou conservação da edificação.</p>
+        <!-- Ver se vai colocar
+          Por isso, é fundamental realizar avaliações técnicas regulares, seguir as normas de engenharia e promover manutenções adequadas para garantir a segurança dos usuários e aumentar a vida útil da estrutura. Com o nosso projeto de uso do sensor flexível podemos identificar uma falha estrutural e uma possível queda de acordo com o grau de deslocamento da estrutura. Sabendo do erro, podemos corrigir antes que ocorra uma queda.-->
         </section>
 
         <section class="card" id="montagem" style="margin-top:18px">
           <h2>Montagem e Esquema</h2>
-          <p class="muted">Substitua as imagens abaixo pelas capturas do seu circuito no Tinkercad.</p>
-          <!-- imagens de exemplo: troque src pelos seus arquivos -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
             <img src="screenshot1.jpg" alt="Esquema Tinkercad" style="width:100%;border-radius:8px;height:200px;object-fit:cover">
             <img src="screenshot2.jpg" alt="Breadboard" style="width:100%;border-radius:8px;height:200px;object-fit:cover">
@@ -46,7 +42,6 @@
 
         <section class="card" id="codigo" style="margin-top:18px">
           <h2>Código Arduino</h2>
-          <p class="muted">Clique em <strong>Copiar código</strong> para colar no editor do Tinkercad ou no Arduino IDE.</p>
           <div class="flex right" style="margin-bottom:8px">
             <button class="btn" id="copyBtn">Copiar código</button>
             <button class="btn secondary" id="downloadBtn">Baixar .ino</button>
@@ -118,7 +113,7 @@ void loop(){
         </section>
       </div>
 
-      <!-- coluna lateral -->
+
       <aside>
         <div class="card" id="componentes">
           <h2>Componentes</h2>
