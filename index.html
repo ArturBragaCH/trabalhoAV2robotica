@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styla.css">
+  <title>Projeto Tinkercad - Circuito</title>
+</head>
+<body>
+  <header>
+    <h1>Projeto Tinkercad — Circuito com Arduino</h1>
+    <nav>
+      <a href="#sobre">Sobre</a>
+      <a href="#componentes">Componentes</a>
+      <a href="#montagem">Montagem</a>
+      <a href="#codigo">Código</a>
+      <a href="#galeria">Galeria</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+      <!-- coluna principal -->
+      <div>
+        <section class="card" id="sobre">
+          <h2>Sobre o Projeto</h2>
+          <p class="lead">Apresente aqui o objetivo do circuito: por exemplo, "piscar LEDs em sequência para demonstrar controle digital com Arduino". Explique em 2–3 linhas o que o visitante verá.</p>
+          <div class="meta">Autor: <strong>Artur</strong> • Ferramenta: <strong>Tinkercad Circuits</strong></div>
+        </section>
+
+        <section class="card" id="montagem" style="margin-top:18px">
+          <h2>Montagem e Esquema</h2>
+          <p class="muted">Substitua as imagens abaixo pelas capturas do seu circuito no Tinkercad.</p>
+          <!-- imagens de exemplo: troque src pelos seus arquivos -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <img src="screenshot1.jpg" alt="Esquema Tinkercad" style="width:100%;border-radius:8px;height:200px;object-fit:cover">
+            <img src="screenshot2.jpg" alt="Breadboard" style="width:100%;border-radius:8px;height:200px;object-fit:cover">
+          </div>
+          <p style="margin-top:12px">Descrição passo a passo:</p>
+          <ol>
+            <li>Coloque o Arduino Uno na área de trabalho.</li>
+            <li>Conecte o LED ao pino digital 13 com resistor de 220Ω ao GND.</li>
+            <li>Verifique conexões e carregue o código.</li>
+          </ol>
+        </section>
+
+        <section class="card" id="codigo" style="margin-top:18px">
+          <h2>Código Arduino</h2>
+          <p class="muted">Clique em <strong>Copiar código</strong> para colar no editor do Tinkercad ou no Arduino IDE.</p>
+          <div class="flex right" style="margin-bottom:8px">
+            <button class="btn" id="copyBtn">Copiar código</button>
+            <button class="btn secondary" id="downloadBtn">Baixar .ino</button>
+          </div>
+
+          <pre id="codeBlock">
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+String estadoPilar1, estadoPilar2;;
+int ledVermelho = 9, ledVerde = 8;
+int pilar1, pilar2;
+
+void setup(){
+  lcd.begin(16,2);
+  pinMode(A5, INPUT);
+  pinMode(A4, INPUT);
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledVermelho, OUTPUT);
+  pinMode(10, OUTPUT);
+}
+
+void mostrarEstado(){
+	lcd.clear();
+    lcd.setCursor(0, 0);
+  	lcd.print("Pilar 1: "+ estadoPilar1);
+    lcd.setCursor(0, 1);
+  	lcd.print("Pilar 2: "+ estadoPilar2);
+}
+
+String verificarEstado(int pilar){
+  if (pilar < 5){
+	return "Ok"; 
+  } else if (pilar <= 10){
+ 	return "Irregular"; 
+  } else {
+    return "Comprometido";
+  }
+}
+
+void loop(){
+  pilar1 = map(analogRead(A5), 585, 372, 0, 90);
+  pilar2 = map(analogRead(A4), 585, 372, 0, 90);
+  
+  estadoPilar1 = verificarEstado(pilar1);
+  estadoPilar2 = verificarEstado(pilar2);
+  
+  
+  if (estadoPilar1 == "Ok" & estadoPilar2 == "Ok"){
+    digitalWrite(ledVermelho, LOW);
+    digitalWrite(ledVerde, HIGH);
+    noTone(10);
+	mostrarEstado();
+  } else {
+    digitalWrite(ledVermelho, HIGH);
+    digitalWrite(ledVerde, LOW);
+    tone(10, 4450, 1000);
+	mostrarEstado();
+  }
+  
+  delay(100);
+}
+          </pre>
+        </section>
+
+        <section class="card" id="resultados" style="margin-top:18px">
+          <h2>Resultados e Observações</h2>
+          <p class="muted">Descreva o que acontece quando o circuito é ligado, problemas encontrados e soluções. Exemplo: "O LED pisca a cada 0.5s; se não piscar, verifique o resistor e a polaridade do LED."</p>
+        </section>
+      </div>
+
+      <!-- coluna lateral -->
+      <aside>
+        <div class="card" id="componentes">
+          <h2>Componentes</h2>
+          <div class="parts" style="margin-top:10px">
+            <div class="part">Arduino Uno</div>
+            <div class="part">Resistor 1kΩ</div>
+            <div class="part">2 Resistor 40kΩ</div>
+            <div class="part">2 Resistor 150Ω</div>
+            <div class="part">2 Sensor flexível</div>
+            <div class="part">Piezo</div>
+            <div class="part">Potenciômetro</div>
+            <div class="part">LCD 16 x 2</div>
+            <div class="part">LED RGB</div>
+          </div>
+        </div>
+
+        <div class="card" id="galeria" style="margin-top:18px">
+          <h2>Galeria</h2>
+          <div class="gallery" style="margin-top:8px">
+            <img src="thumb1.jpg" alt="foto 1">
+            <img src="thumb2.jpg" alt="foto 2">
+            <img src="thumb3.jpg" alt="foto 3">
+            <img src="thumb4.jpg" alt="foto 4">
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:18px">
+          <h2>Vídeo</h2>
+          <video controls style="width:100%;border-radius:8px">
+            <source src="demo.mp4" type="video/mp4">
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="muted">Projeto acadêmico • Feito com Tinkercad e Arduino</div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
