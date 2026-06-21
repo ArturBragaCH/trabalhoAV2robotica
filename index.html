@@ -48,61 +48,72 @@ Inteligente </h1>
           </div>
 
           <pre id="codeBlock">
-#include <LiquidCrystal.h>
+#include <LiquidCrystal.h> // LCD
 
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
-String estadoPilar1, estadoPilar2;;
+String estadoPilar1, estadoPilar2;
 int ledVermelho = 9, ledVerde = 8;
-int pilar1, pilar2;
+int pilar1, pilar2 = 0;
 
 void setup(){
-  lcd.begin(16,2);
-  pinMode(A5, INPUT);
-  pinMode(A4, INPUT);
+  Serial.begin(9600);   // Serial
+  lcd.begin(16,2);     // LCD 16x2
   pinMode(ledVerde, OUTPUT);
   pinMode(ledVermelho, OUTPUT);
-  pinMode(10, OUTPUT);
+  pinMode(10, OUTPUT); // Buzzer
 }
 
 void mostrarEstado(){
-	lcd.clear();
-    lcd.setCursor(0, 0);
-  	lcd.print("Pilar 1: "+ estadoPilar1);
-    lcd.setCursor(0, 1);
-  	lcd.print("Pilar 2: "+ estadoPilar2);
+  lcd.clear();                     // Limpa display
+  lcd.setCursor(0, 0);
+  lcd.print("Pilar 1: "+ estadoPilar1);
+  lcd.setCursor(0, 1);
+  lcd.print("Pilar 2: "+ estadoPilar2);
+}
+
+long readUltrasonicDistance(int triggerPin, int echoPin)
+{
+  pinMode(triggerPin, OUTPUT);
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(triggerPin, HIGH);  // Pulso trigger
+  delayMicroseconds(10);
+  digitalWrite(triggerPin, LOW);
+  pinMode(echoPin, INPUT);
+  return pulseIn(echoPin, HIGH);   // Tempo em microssegundos
 }
 
 String verificarEstado(int pilar){
-  if (pilar < 5){
-	return "Ok"; 
-  } else if (pilar <= 10){
- 	return "Irregular"; 
-  } else {
-    return "Comprometido";
-  }
+  if (pilar > 100) return "Ok";         // Bom
+  else if (pilar >= 50) return "Irregular"; // Atenção
+  else return "Comprometido";            // Crítico
 }
 
 void loop(){
-  pilar1 = map(analogRead(A5), 585, 372, 0, 90);
-  pilar2 = map(analogRead(A4), 585, 372, 0, 90);
-  
+  // Converte tempo (us) em cm (fator aproximado)
+  pilar1 = 0.01723 * readUltrasonicDistance(A3, A2);
+  pilar2 = 0.01723 * readUltrasonicDistance(A5, A4);
+
   estadoPilar1 = verificarEstado(pilar1);
   estadoPilar2 = verificarEstado(pilar2);
-  
-  
-  if (estadoPilar1 == "Ok" & estadoPilar2 == "Ok"){
+
+  Serial.println(pilar1);
+  Serial.println(pilar2);
+
+  // Ambos OK -> verde; caso contrário -> vermelho + alarme
+  if (estadoPilar1 == "Ok" && estadoPilar2 == "Ok"){
     digitalWrite(ledVermelho, LOW);
     digitalWrite(ledVerde, HIGH);
     noTone(10);
-	mostrarEstado();
+    mostrarEstado();
   } else {
     digitalWrite(ledVermelho, HIGH);
     digitalWrite(ledVerde, LOW);
     tone(10, 4450, 1000);
-	mostrarEstado();
+    mostrarEstado();
   }
-  
-  delay(100);
+
+  delay(100); // Pausa
 }
           </pre>
         </section>
