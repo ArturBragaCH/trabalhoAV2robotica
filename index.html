@@ -8,36 +8,33 @@
 </head>
 <body>
   <header>
-    <h1>Sistema de Monitoramento Estrutural 
-Inteligente </h1>
+    <h1>Sistema de Monitoramento Estrutural Inteligente</h1>
     <nav>
-      <p>Alunos: Artur Braga Chaffin Marques /  João Marcelo Corrêa Ramos / Magno Maia da Silva de França / Arthur Rapozo de Souza Pereira / João Vitor Hiath</p>
+      <p>Alunos: Artur Braga Chaffin Marques / João Marcelo Corrêa Ramos / Magno Maia da Silva de França / Arthur Rapozo de Souza Pereira / João Vitor Hiath</p>
     </nav>
   </header>
 
   <main class="wrap">
-    <div class="grid">
-
-      <div>
+    <div class="columns">
+      <!-- Coluna esquerda: Sobre -> Solução Proposta -> Código Arduino -->
+      <div class="col left">
         <section class="card" id="sobre">
           <h2>Sobre o Projeto</h2>
-          <p class="lead">As estruturas com maior possibilidade de apresentar risco de queda incluem marquises, lajes, estruturas em balanço, pontes, telhados, coberturas e outras construções que estão constantemente sujeitas a esforços e à ação do tempo. O risco de colapso dessas estruturas pode ser causado por diversos fatores, como falhas no planejamento e dimensionamento estrutural, utilização de materiais inadequados ou de baixa qualidade, desgaste natural dos componentes ao longo dos anos, infiltrações, corrosão das armaduras, fissuras, trincas e excesso de carga aplicada sobre a estrutura. Além disso, a falta de inspeções periódicas e de manutenção preventiva contribui significativamente para o surgimento de problemas que podem comprometer a estabilidade da construção. Em muitos casos, os acidentes envolvendo quedas de estruturas estão relacionados à negligência humana, seja na fase de projeto, execução, utilização ou conservação da edificação.</p>
-        <!-- Ver se vai colocar
-          Por isso, é fundamental realizar avaliações técnicas regulares, seguir as normas de engenharia e promover manutenções adequadas para garantir a segurança dos usuários e aumentar a vida útil da estrutura. Com o nosso projeto de uso do sensor flexível podemos identificar uma falha estrutural e uma possível queda de acordo com o grau de deslocamento da estrutura. Sabendo do erro, podemos corrigir antes que ocorra uma queda.-->
+          <p class="lead">Diversas estruturas, como marquises, lajes, pontes, telhados e coberturas, estão sujeitas ao desgaste natural e a diversos fatores que podem comprometer sua segurança. Entre as principais causas de falhas estruturais estão erros de projeto, uso de materiais inadequados, infiltrações, corrosão, fissuras, excesso de carga e falta de manutenção preventiva.<br><br>
+          Muitos acidentes envolvendo desabamentos poderiam ser evitados com inspeções regulares e monitoramento contínuo. A identificação precoce de deformações ou deslocamentos permite que reparos sejam realizados antes que os danos evoluam para situações de risco, aumentando a segurança das pessoas e a vida útil da estrutura.
+          </p>
         </section>
 
-        <section class="card" id="montagem" style="margin-top:18px">
-          <h2>Montagem e Esquema</h2>
-          <img src="circuito_AV2.jpeg" alt="Esquema Tinkercad" style="width:100%;border-radius:8px;height:400px;">
-          <p style="margin-top:12px">Descrição passo a passo:</p>
-          <ol>
-            <li>Coloque o Arduino Uno na área de trabalho.</li>
-            <li>Conecte o LED ao pino digital 13 com resistor de 220Ω ao GND.</li>
-            <li>Verifique conexões e carregue o código.</li>
-          </ol>
+        <section class="card" id="resultados">
+          <h2>Solução Proposta</h2>
+          <p class="lead">Nosso projeto propõe um sistema inteligente de monitoramento estrutural utilizando sensores de proximidade. Esses sensores medem continuamente a distância entre um ponto de referência e elementos da estrutura, permitindo identificar movimentações, deformações ou deslocamentos anormais.<br><br>
+          Inicialmente, é definida uma condição de referência considerada segura. Os sensores realizam medições periódicas e enviam os dados para um microcontrolador. Quando a variação detectada ultrapassa os limites estabelecidos, o sistema gera um alerta indicando uma possível falha estrutural, permitindo ações preventivas.<br><br>
+          O sistema pode ser instalado em vigas e pilares de concreto, pontes, estruturas metálicas, lajes, pisos e coberturas. Dessa forma, é possível monitorar deformações, deslocamentos e outros sinais que indiquem comprometimento estrutural.<br><br>
+          O monitoramento em tempo real auxilia na manutenção preventiva, reduz custos com reparos emergenciais e diminui o risco de acidentes e desabamentos. Além disso, contribui para a preservação das estruturas e para a segurança.
+          </p>
         </section>
 
-        <section class="card" id="codigo" style="margin-top:18px">
+        <section class="card" id="codigo">
           <h2>Código Arduino</h2>
           <div class="flex right" style="margin-bottom:8px">
             <button class="btn" id="copyBtn">Copiar código</button>
@@ -45,7 +42,7 @@ Inteligente </h1>
           </div>
 
           <pre id="codeBlock">
-#include <LiquidCrystal.h> // LCD
+#include &lt;LiquidCrystal.h&gt; // LCD
 
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
 String estadoPilar1, estadoPilar2;
@@ -114,15 +111,21 @@ void loop(){
 }
           </pre>
         </section>
-
-        <section class="card" id="resultados" style="margin-top:18px">
-          <h2>Resultados e Observações</h2>
-          <p class="muted">Descreva o que acontece quando o circuito é ligado, problemas encontrados e soluções. Exemplo: "O LED pisca a cada 0.5s; se não piscar, verifique o resistor e a polaridade do LED."</p>
-        </section>
       </div>
 
+      <!-- Coluna direita: Montagem -> Componentes -> Vídeo -->
+      <div class="col right">
+        <section class="card" id="montagem">
+          <h2>Montagem e Esquema</h2>
+          <img src="circuito_AV2.jpeg" alt="Esquema Tinkercad">
+          <p style="margin-top:12px">Descrição passo a passo:</p>
+          <ol>
+            <li>Coloque o Arduino Uno na área de trabalho.</li>
+            <li>Conecte o LED ao pino digital 13 com resistor de 220Ω ao GND.</li>
+            <li>Verifique conexões e carregue o código.</li>
+          </ol>
+        </section>
 
-      <aside>
         <div class="card" id="componentes">
           <h2>Componentes</h2>
           <div class="parts" style="margin-top:10px">
@@ -133,24 +136,24 @@ void loop(){
             <div class="part">1× buzzer piezo</div>
             <div class="part">2× LEDs (vermelho e verde)</div>
             <div class="part">2× resistores 220 Ω</div>
-            <div class="part">1× potenciômetro 10 kΩ </div>
+            <div class="part">1× potenciômetro 10 kΩ</div>
             <div class="part">Fios jumper (macho‑fêmea e macho‑macho)</div>
           </div>
         </div>
 
-        <div class="card" style="margin-top:18px">
+        <div class="card" id="videoCard">
           <h2>Vídeo</h2>
-          <video controls style="width:100%;border-radius:8px">
+          <video controls>
             <source src="demo.mp4" type="video/mp4">
             Seu navegador não suporta vídeo.
           </video>
-          <a href="https://www.tinkercad.com/things/lfAp1g8llBu/editel?sharecode=sK2fOKH2i3T0Dfqi69lTjyN6acjz4xmlEowUYklI2bc">Link para o projeto no Tinkercad</a>
+          <a href="https://www.tinkercad.com/things/lfAp1g8llBu/editel?sharecode=sK2fOKH2i3T0Dfqi69lTjyN6acjz4xmlEowUYklI2bc" style="display:inline-block;margin-top:10px;color:var(--primary);text-decoration:none">Link para o projeto no Tinkercad</a>
         </div>
-      </aside>
+      </div>
     </div>
 
-    <footer>
-      <div class="muted">Projeto acadêmico • Feito com Tinkercad e Arduino</div>
+    <footer style="margin-top:var(--gap);text-align:center">
+      <div class="muted">Projeto acadêmico • <a href="https://github.com/ArturBragaCH" style="color:inherit;text-decoration:none">Feito por Artur Braga</a></div>
     </footer>
   </main>
 
